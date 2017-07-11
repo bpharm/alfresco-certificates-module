@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model name="acme:contentModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+<model name="sc:contentModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
 
     <!-- Optional meta-data about the model -->
-    <description>Sample Document Model</description>
-    <author>My Name</author>
+    <description>Pharm Document Model</description>
+    <author>Maksim Karpychev</author>
     <version>1.0</version>
 
     <imports>
@@ -17,7 +17,7 @@
 
     <!-- Custom namespace for the ACME company -->
     <namespaces>
-        <namespace uri="http://www.acme.org/model/content/1.0" prefix="acme"/>
+        <namespace uri="http://docs.pharm.local/model/content/1.0" prefix="sc"/>
     </namespaces>
 
     <constraints>
@@ -44,42 +44,80 @@
             ACME Enterprise-wide Document root type.
             All other custom document types would extend this one.
         -->
-        <type name="acme:document">
-            <title>Sample Document Type</title>
+        <type name="sc:document">
+            <title>Pharm Document Type</title>
             <parent>cm:content</parent>
-            <properties>
-                <property name="acme:documentId">
-                    <title>Document Identification Number</title>
-                    <type>d:text</type>
-                </property>
-            </properties>
             <mandatory-aspects>
-                <aspect>acme:securityClassified</aspect>
+                <aspect>cm:generalclassifiable</aspect>
             </mandatory-aspects>
         </type>
-    </types>
-
-    <aspects>
-        <!-- A document can have security classification applied and
-             faceted search is specifically enabled for best performance and we change
-             default index config to not tokenize the value. -->
-        <aspect name="acme:securityClassified">
-            <title>ACME Security Classified</title>
-            <description>Content has been security classified</description>
+        <type name="sc:series_folder">
+            <title>Series Folder</title>
+            <parent>cm:folder</parent>
+            <properties/>
+            <associations/>
+        </type>
+        <type name="sc:series">
+            <title>Pharm Series</title>
+            <parent>sc:document</parent>
             <properties>
-                <property name="acme:securityClassification">
-                    <type>d:text</type>
+                <property name="sc:date">
+                    <title>Uploaded Date</title>
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
                     <index enabled="true">
-                        <atomic>true</atomic>
-                        <stored>false</stored>
-                        <tokenised>false</tokenised>
+                        <tokenised>true</tokenised>
+                    </index>
+                </property>
+                <property name="sc:expired">
+                    <title>Expired</title>
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>true</tokenised>
+                    </index>
+                </property>
+                <property name="sc:type">
+                    <title>Document Type</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>true</tokenised>
+                        <facetable>false</facetable>
                     </index>
                     <constraints>
-                        <constraint ref="acme:securityClassificationOptions"/>
+                        <constraint name="sc:documentTypeList" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Сертификат качества</value>
+                                    <value>Сертификат анализа</value>
+                                    <value>Декларация</value>
+                                    <value>Сертификат производителя (русский язык)</value>
+                                    <value>Регистрационное удостоверение</value>
+                                    <value>Сертификат соответствия</value>
+                                    <value>Протокол анализа</value>
+                                    <value>Сертификат соответствия РОСТЕСТ</value>
+                                    <value>Информационное письмо</value>
+                                    <value>Гигиенический сертификат</value>
+                                    <value>Паспорт</value>
+                                    <value>Договор</value>
+                                    <value>Протокол разногласий</value>
+                                    <value>Доверенность</value>
+                                    <value>Доп. соглашения к договору</value>
+                                    <value>Аналитический Лист</value>
+                                    <value>Акт о забраковке</value>
+                                </list>
+                            </parameter>
+                            <parameter name="caseSensitive">
+                                <value>true</value>
+                            </parameter>
+                            <parameter name="sorted">
+                                <value>false</value>
+                            </parameter>
+                        </constraint>
                     </constraints>
                 </property>
             </properties>
-        </aspect>
-    </aspects>
-
+        </type>
+    </types>
 </model>
