@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>alfresco-certificates-share-jar</artifactId>
-    <name>Alfresco Share JAR Module</name>
+    <name>Alfresco Certificates Share JAR Module</name>
     <packaging>jar</packaging>
-    <description>Sample Share JAR Module (to be included in the share.war) - part of AIO - SDK 3</description>
+    <description>Certificate Share JAR Module (to be included in the share.war) - part of AIO - SDK 3</description>
 
     <parent>
         <groupId>local.pharm</groupId>

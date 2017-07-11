@@ -19,7 +19,6 @@
     <config evaluator="string-compare" condition="DocumentLibrary">
         <aspects>
             <visible>
-                <aspect name="acme:securityClassified"/>
             </visible>
             <addable> <!-- defaults to visible config -->
             </addable>
@@ -27,32 +26,15 @@
             </removeable>
         </aspects>
         <types>
-            <!-- Define the ACME base doc type as decedent from cm:content -->
+            <!-- Define the Pharm base doc type as decedent from cm:content -->
             <type name="cm:content">
-                <subtype name="acme:document"/>
+                <subtype name="sc:document"/>
+            </type>
+            <type name="sc:document">
+                <subtype name="sc:series"/>
+                <subtype name="sc:series_folder"/>
             </type>
         </types>
-    </config>
-
-    <!--================================================================================================================
-          Advanced Search Forms for types
-          (search forms for aspects are not available)
-      =============================================================================================================-->
-
-    <config evaluator="string-compare" condition="AdvancedSearch" replace="true">
-        <advanced-search>
-            <forms>
-                <!-- Standard out-of-the-box types -->
-                <form labelId="search.form.label.cm_content" descriptionId="search.form.desc.cm_content">cm:content
-                </form>
-                <form labelId="search.form.label.cm_folder" descriptionId="search.form.desc.cm_folder">cm:folder</form>
-
-                <!-- Custom type -->
-                <form labelId="form.label.advancedsearch.acmeDocument"
-                      descriptionId="form.description.advancedsearch.acmeDocument">acme:document
-                </form>
-            </forms>
-        </advanced-search>
     </config>
 
     <!--================================================================================================================
@@ -67,10 +49,10 @@
 
         =============================================================================================================-->
 
-    <!-- __________________________________ acme:document base type _________________________________________________-->
+    <!-- __________________________________ sc:document base type _________________________________________________-->
 
-    <!-- View and Edit forms for acme:document -->
-    <config evaluator="node-type" condition="acme:document">
+    <!-- View and Edit forms for sc:document -->
+    <config evaluator="node-type" condition="sc:document">
         <forms>
             <!-- Default form configuration for the cm:content type -->
             <form>
@@ -172,9 +154,10 @@
                     <show id="surf:mid"/>
                     <show id="surf:label"/>
 
-                    <!-- ACME custom props -->
-                    <show id="acme:documentId" force="true"/>
-                    <show id="acme:securityClassification"/>
+                    <!-- Pharm custom props -->
+                    <show id="sc:documentId" force="true"/>
+                    <show id="sc:date" force="true"/>
+                    <show id="sc:expired" force="true"/>
                 </field-visibility>
                 <appearance>
                     <field id="cm:name">
@@ -224,13 +207,17 @@
                     <field id="cm:sentdate" read-only="true"/>
                     <field id="cm:subjectline" read-only="true"/>
 
-                    <!-- ACME Props appearance -->
-                    <set id="acmeDocSet" appearance="bordered-panel" label-id="form.set.label.acme.document"/>
-                    <field id="acme:documentId" label-id="form.field.label.acme.documentId" set="acmeDocSet">
-                        <control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+                    <!-- SC Props appearance -->
+                    <set id="scDocSet" appearance="bordered-panel" label-id="form.set.label.sc.series"/>
+                    <field id="sc:date" label-id="form.field.label.sc.date" set="scDocSet">
+                        <control template="/org/alfresco/components/form/controls/date.ftl"/>
                     </field>
-                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification"
-                           set="acmeDocSet"/>
+                    <field id="sc:expired" label-id="form.field.label.sc.expired" set="scDocSet">
+                        <control template="/org/alfresco/components/form/controls/date.ftl"/>
+                    </field>
+                    <field id="sc:type" label-id="form.field.label.sc.type" set="scDocSet">
+                        <control template="/org/alfresco/components/form/controls/selectone.ftl"/>
+                    </field>
                 </appearance>
             </form>
 
@@ -328,7 +315,7 @@
     </config>
 
     <!-- Create and search forms for acme:document -->
-    <config evaluator="model-type" condition="acme:document">
+    <config evaluator="model-type" condition="sc:document">
         <forms>
             <form>
                 <field-visibility>

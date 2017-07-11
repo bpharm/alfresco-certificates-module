@@ -20,21 +20,6 @@
         <namespace uri="http://docs.pharm.local/model/content/1.0" prefix="sc"/>
     </namespaces>
 
-    <constraints>
-        <constraint name="acme:securityClassificationOptions" type="LIST">
-            <parameter name="allowedValues">
-                <list>
-                    <value></value>
-                    <!-- Empty for default search-->
-                    <value>Public</value>
-                    <value>Client Confidential</value>
-                    <value>Company Confidential</value>
-                    <value>Strictly Confidential</value>
-                </list>
-            </parameter>
-        </constraint>
-    </constraints>
-
     <!-- ===============================================================================================================
         Constraints, Types, and Aspects go here...
         -->
@@ -45,7 +30,7 @@
             All other custom document types would extend this one.
         -->
         <type name="sc:document">
-            <title>Pharm Document Type</title>
+            <title>Pharm Document</title>
             <parent>cm:content</parent>
             <mandatory-aspects>
                 <aspect>cm:generalclassifiable</aspect>
