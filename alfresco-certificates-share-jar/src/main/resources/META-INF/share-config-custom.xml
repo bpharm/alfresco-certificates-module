@@ -51,8 +51,8 @@
 
     <!-- __________________________________ sc:document base type _________________________________________________-->
 
-    <!-- View and Edit forms for sc:document -->
-    <config evaluator="node-type" condition="sc:document">
+    <!-- View and Edit forms for sc:series -->
+    <config evaluator="node-type" condition="sc:series">
         <forms>
             <!-- Default form configuration for the cm:content type -->
             <form>
@@ -158,6 +158,7 @@
                     <show id="sc:documentId" force="true"/>
                     <show id="sc:date" force="true"/>
                     <show id="sc:expired" force="true"/>
+                    <show id="sc:type" force="true"/>
                 </field-visibility>
                 <appearance>
                     <field id="cm:name">
@@ -215,9 +216,7 @@
                     <field id="sc:expired" label-id="form.field.label.sc.expired" set="scDocSet">
                         <control template="/org/alfresco/components/form/controls/date.ftl"/>
                     </field>
-                    <field id="sc:type" label-id="form.field.label.sc.type" set="scDocSet">
-                        <control template="/org/alfresco/components/form/controls/selectone.ftl"/>
-                    </field>
+                    <field id="sc:type" label-id="form.field.label.sc.type" set="scDocSet" />
                 </appearance>
             </form>
 
@@ -265,12 +264,6 @@
                     </field>
 
                     <!-- ACME Props appearance -->
-                    <set id="acmeDocSet" appearance="bordered-panel" label-id="form.set.label.acme.document"/>
-                    <field id="acme:documentId" label-id="form.field.label.acme.documentId" set="acmeDocSet">
-                        <control template="/org/alfresco/components/form/controls/textfield.ftl"/>
-                    </field>
-                    <field id="acme:securityClassification" label-id="form.field.label.acme.securityClassification"
-                           set="acmeDocSet"/>
                 </appearance>
             </form>
 

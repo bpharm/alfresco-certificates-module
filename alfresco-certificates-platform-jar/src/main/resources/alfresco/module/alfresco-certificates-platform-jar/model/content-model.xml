@@ -43,7 +43,7 @@
             <associations/>
         </type>
         <type name="sc:series">
-            <title>Pharm Series</title>
+            <title>Series Document</title>
             <parent>sc:document</parent>
             <properties>
                 <property name="sc:date">
