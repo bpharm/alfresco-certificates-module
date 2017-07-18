@@ -91,6 +91,7 @@
                                     <value>Доп. соглашения к договору</value>
                                     <value>Аналитический Лист</value>
                                     <value>Акт о забраковке</value>
+                                    <value>Неизвестный</value>
                                 </list>
                             </parameter>
                             <parameter name="caseSensitive">
